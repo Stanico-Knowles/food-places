@@ -18,7 +18,7 @@ module.exports.getFoodPlaces = async (criteria) => {
             foodResults.push(foodPlace)
         }
     }
-    return randomizer(foodResults)
+    return { foodPlace: randomizer(foodResults) }
 }
 
 const randomizer = (foodPlaces) => {
