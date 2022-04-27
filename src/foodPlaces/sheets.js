@@ -2,8 +2,10 @@ const Sheets = require('node-sheets').default;
 const gs = new Sheets(process.env.SHEET_ID)
 
 module.exports.getFoodPlaces = async (criteria) => {
+
     await gs.authorizeApiKey(process.env.GOOGLE_API_KEY);
-    const rows = await gs.tables('A:E').rows
+    const table = await gs.tables('A:E')
+    const rows = table.rows
     const foodResults = []
 
     for (let i = 0; i < rows.length; i++) {
