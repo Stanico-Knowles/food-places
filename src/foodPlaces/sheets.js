@@ -1,5 +1,6 @@
 const HTTPError = require('../utils/errors/httpError');
 const CustomErrors = require('./enums/customErrors');
+const ValidRatings = require('./enums/validRatings');
 const Sheets = require('node-sheets').default;
 const gs = new Sheets(process.env.SHEET_ID)
 
@@ -25,6 +26,7 @@ module.exports.getFoodPlaces = async (criteria) => {
             foodResults.push(foodPlace)
         }
     }
+    if (foodResults.length < 1) return { foodPlace: CustomErrors.NoFoodPlaceFitsCriteria }
     return { foodPlace: randomizer(foodResults) }
 }
 
@@ -42,7 +44,13 @@ const randomizer = (foodPlaces) => {
  * @param {object} criteria 
  */
 const validateCriteria = (criteria) => {
-    if (!criteria.avgRating) throw HTTPError.badRequest(CustomErrors.AvgRatingRequired)
-    if (!criteria.distanceKey) throw HTTPError.badRequest(CustomErrors.DistanceKeyRequired)
-    if (!criteria.priceKey) throw HTTPError.badRequest(CustomErrors.PriceKeyRequired)
+    if (!criteria.avgRating || !Object.values(ValidRatings).includes(criteria.avgRating)) {
+        throw HTTPError.badRequest(CustomErrors.AvgRatingRequired)
+    }
+    if (!criteria.distanceKey || !Object.values(ValidRatings).includes(criteria.distanceKey)) {
+        throw HTTPError.badRequest(CustomErrors.DistanceKeyRequired)
+    }
+    if (!criteria.priceKey || !Object.values(ValidRatings).includes(criteria.priceKey)) {
+        throw HTTPError.badRequest(CustomErrors.PriceKeyRequired)
+    }
 }

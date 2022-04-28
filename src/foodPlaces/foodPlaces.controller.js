@@ -2,9 +2,7 @@ const express = require('express');
 const { getFoodPlaces } = require('./sheets');
 const app = express.Router();
 
-// /food-place
-// /lunch
-app.get('/food-places/random', async (req, res) => {
+app.get('/food-place', async (req, res) => {
     try {
         const criteria = {
             avgRating: req.body.avgRating,
@@ -14,7 +12,7 @@ app.get('/food-places/random', async (req, res) => {
         return res.status(200).json(await getFoodPlaces(criteria))
     }
     catch(err) {
-        res.status(err.code || 500).json({ error: err.message })
+        res.status(err.code).json({ error: err.message })
     }
 });
 
