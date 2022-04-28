@@ -1,7 +1,7 @@
 const CustomErrors = {
-    AvgRatingRequired: 'Please enter a valid average rating (any integer 1 through 5).',
-    DistanceKeyRequired: 'Please enter a valid distance key (any integer 1 through 5).',
-    PriceKeyRequired: 'Please enter a valid price key (any integer 1 through 5).',
+    AvgRatingRequired: 'Please enter a valid average rating.',
+    DistanceKeyRequired: 'Please enter a valid distance key.',
+    PriceKeyRequired: 'Please enter a valid price key.',
     NoFoodPlaceFitsCriteria: 'No food place fits that criteria.'
 }
 
