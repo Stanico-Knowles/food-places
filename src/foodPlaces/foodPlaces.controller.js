@@ -5,9 +5,9 @@ const app = express.Router();
 app.get('/food-place', async (req, res) => {
     try {
         const criteria = {
-            avgRating: req.body.avgRating,
-            priceKey: req.body.priceKey,
-            distanceKey: req.body.distanceKey,
+            avgRating: parseInt(req.query.rating),
+            priceKey: parseInt(req.query.price),
+            distanceKey: parseInt(req.query.distance),
         }
         return res.status(200).json(await getFoodPlaces(criteria))
     }
